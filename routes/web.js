@@ -9,6 +9,13 @@ module.exports = app => {
     const editions = require("../App/controller/editionController");
     const auth = require("../App/controller/authentificationController");
     const users = require("../App/controller/userController");
+    // Mongo Controller
+    const mongobooks = require("../App/controller/mongo/bookController");
+    const mongoAuteurs = require("../App/controller/mongo/auteurController");
+    const mongoGenres = require("../App/controller/mongo/genreController");
+    const mongoEditions = require("../App/controller/mongo/editionController");
+    const mongoUsers = require("../App/controller/mongo/userController");
+    
     var router = require("express").Router();
     // Book routes
     router.post("/book", books.create);
@@ -49,6 +56,7 @@ module.exports = app => {
     router.post("/api/auth/login",[verifySignUp.checkDuplicateUsernameOrEmail,verifySignUp.checkRolesExisted],auth.Login);
     router.post("/api/auth/logout",[verifySignUp.checkDuplicateUsernameOrEmail,verifySignUp.checkRolesExisted],auth.Logout);
     // Redirection des pages
+    
     router.get("/api/admin/index",[
       verifyToken,isAdmin
     ],admin);
@@ -56,6 +64,9 @@ module.exports = app => {
       verifyToken
     ],userBoard)
     app.use('/api', router);
-   
+   // Mongo routes 
+    router.post("/createUser", mongoUsers.create);
+    router.post("/updateUser/:id", mongoUsers.update);
+
 
   };
