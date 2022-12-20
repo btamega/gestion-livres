@@ -1,7 +1,7 @@
-FROM node:16
-RUN apk add --no-cache python2 g++ make
-WORKDIR /app
+FROM node:16.17.1
+WORKDIR /frontend
+COPY ./package.json ./
+RUN npm install
 COPY . .
-RUN npm install --production
-CMD ["node", "src/index.js"]
 EXPOSE 3000
+CMD ["npm", "start"]
