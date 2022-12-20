@@ -6,19 +6,11 @@ const MongoClient = require('mongodb').MongoClient
 // require("./routes/web")(app);
 const { json, urlencoded } = require('express');
 const { default: mongoose } = require('mongoose');
-// var corsOptions ={
-//   origin : "http://localhost:3000",
-//   credentials:true,
-//   optionSuccessStatus:200
-// };
 app.use(cors);
 app.use(json());
 app.use(urlencoded({extended:true}));
-
 require("./App/config/mongodb/db-config")(mongoose);
 require("./App/controller/tutorielController");
-
-
 app.listen(port, () => {
   console.log(port)
 })

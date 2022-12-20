@@ -1,7 +1,7 @@
-FROM node:16
+FROM node:16.17.1
 WORKDIR /App
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 7000
+EXPOSE 5000
 CMD ["node", "index.js"]
